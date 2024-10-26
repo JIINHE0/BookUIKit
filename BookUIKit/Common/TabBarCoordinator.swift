@@ -7,19 +7,17 @@
 
 import UIKit
 
-protocol TabBarCoordinator: Coordinator {
+protocol TabBarCoordinatorProtocol: Coordinator {
     var tabBarController: UITabBarController { get set }
 }
 
-final class DefaultTabBarCoordinator: Coordinator, HomeCoordinatorDelegate {
+final class TabBarCoordinator: Coordinator, HomeCoordinatorDelegate {
     
     var finishDelegate: (any CoordinatorFinishDelegate)?
-    
     
     func showPersonalChat() {
         print("Test")
     }
-    
 
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []

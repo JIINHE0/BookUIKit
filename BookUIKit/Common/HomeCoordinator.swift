@@ -8,11 +8,12 @@
 import Foundation
 import UIKit
 
-// 코디네이터 : 코디네이터 관계일 때
+// 코디네이터 : 코디네이터 관계일 때 사용
 protocol HomeCoordinatorDelegate: AnyObject {
     func showPersonalChat( )
 }
 
+// 홈에 관련된 코디네이터 프로토콜
 protocol HomeCoordinatorProtocol: Coordinator {
     
     var homeViewController: HomeVC { get set }
