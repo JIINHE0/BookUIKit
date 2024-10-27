@@ -25,38 +25,38 @@ enum RequestGenerationError: Error {
 class Endpoint<R>: ResponseRequestable {
     typealias Response = R
     
-    var responseDecorder: ResponseDecoder
-    var path: String
-    var isFullPath: Bool
-    var method: HTTPMethodType
-    var headerParameters: [String : String]
-    var queryParameters: [String : String]
-    var queryParametersEncodable:  Encodable?
-    var bodyParametersEncodable: Encodable?
-    var bodyParameters: [String : Any]
-    var bodyEncorder: BodyEncorder
+
+    let path: String
+    let isFullPath: Bool
+    let method: HTTPMethodType
+    let headerParameters: [String: String]
+    let queryParametersEncodable: Encodable?
+    let queryParameters: [String: Any]
+    let bodyParametersEncodable: Encodable?
+    let bodyParameters: [String: Any]
+    let bodyEncoder: BodyEncoder
+    let responseDecoder: ResponseDecoder
     
-    init(responseDecorder: any ResponseDecoder,
-         path: String,
-         isFullPath: Bool,
+    init(path: String,
+         isFullPath: Bool = false,
          method: HTTPMethodType,
-         headerParameters: [String : String],
-         queryParameters: [String : String],
+         headerParameters: [String: String] = [:],
          queryParametersEncodable: Encodable? = nil,
+         queryParameters: [String: Any] = [:],
          bodyParametersEncodable: Encodable? = nil,
-         bodyParameters: [String : Any],
-         bodyEncorder: BodyEncorder
-    ) {
-        self.responseDecorder = responseDecorder
+         bodyParameters: [String: Any] = [:],
+         bodyEncoder: BodyEncoder = JSONBodyEncoder(),
+         responseDecoder: ResponseDecoder = JSONResponseDecoder()) {
         self.path = path
         self.isFullPath = isFullPath
         self.method = method
         self.headerParameters = headerParameters
-        self.queryParameters = queryParameters
         self.queryParametersEncodable = queryParametersEncodable
+        self.queryParameters = queryParameters
         self.bodyParametersEncodable = bodyParametersEncodable
         self.bodyParameters = bodyParameters
-        self.bodyEncorder = bodyEncorder
+        self.bodyEncoder = bodyEncoder
+        self.responseDecoder = responseDecoder
     }
 }
 
@@ -66,11 +66,11 @@ protocol ResponseDecoder {
     func decode<T: Decodable>(_ data: Data) throws -> T
 }
 
-protocol BodyEncorder {
+protocol BodyEncoder {
     func encode(_ parameters: [String: Any]) -> Data?
 }
 
-struct JSONBodyEncorder: BodyEncorder {
+struct JSONBodyEncoder: BodyEncoder {
     func encode(_ parameters: [String : Any]) -> Data? {
         return try? JSONSerialization.data(withJSONObject: parameters)
     }
