@@ -64,9 +64,10 @@ final class DefaultDataTransferService {
     private let errorResolver: DataTransferErrorResolver
     private let errorLogger: DataTransferErrorLogger
     
-    init(networkService: NetworkService,
-         errorResolver: DataTransferErrorResolver = DefaultDataTransferErrorResolver(),
-         errorLogger: DataTransferErrorLogger = DefaultDataTransferErrorLogger()
+    init(
+        with networkService: NetworkService,
+        errorResolver: DataTransferErrorResolver = DefaultDataTransferErrorResolver(),
+        errorLogger: DataTransferErrorLogger = DefaultDataTransferErrorLogger()
     ) {
         self.networkService = networkService
         self.errorResolver = errorResolver

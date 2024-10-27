@@ -48,7 +48,7 @@ protocol NetworkErrorLogger {
 /// URLRequest 요청을 만들고 sessionManager를 통해 전송하고 실제 데이터를 받아 처리
 /// 요청 실패 시 에러를 적절하게 분류하고 로깅함 (네트워크 장애 원인 파악을 쉽도록 지원)
 /// NetworkConfigurable요청의 구성(기본, URL, 헤더 등)을 받아오고, NetworkSessionManager와 NetworkErrorLogger를 주입받아 내부에서 네트워크 요청을 처리하도록 함
-final class DefuatlNetworkService: NetworkService {
+final class DefaultNetworkService: NetworkService {
     
     private let config: NetworkConfigurable
     private let sessionManager: NetworkSessionManager
