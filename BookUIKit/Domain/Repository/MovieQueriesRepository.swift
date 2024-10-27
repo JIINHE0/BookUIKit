@@ -1,5 +1,5 @@
 //
-//  MoviewQueriesRepository.swift
+//  MovieQueriesRepository.swift
 //  BookUIKit
 //
 //  Created by jiin heo on 10/27/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MoviewQueriesRepository {
+protocol MovieQueriesRepository {
     func fetchRecentsQueries(
         maxCount: Int,
         comletion: @escaping (Result<[MovieQuery], Error>) -> Void

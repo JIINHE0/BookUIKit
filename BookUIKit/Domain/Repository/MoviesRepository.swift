@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MovieRepository {
+protocol MoviesRepository {
     @discardableResult
     func fetchVoviesList(
         query: MovieQuery,
