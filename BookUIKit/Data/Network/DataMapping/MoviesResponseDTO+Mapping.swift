@@ -31,10 +31,12 @@ extension MoviesResponseDTO {
             case overview
             case releaseDate = "release_date"
         }
+        
         enum GenreDTO: String, Decodable {
             case adventure
             case scienceFiction = "science_fiction"
         }
+        
         let id: Int
         let title: String?
         let genre: GenreDTO?
@@ -42,4 +44,5 @@ extension MoviesResponseDTO {
         let overview: String?
         let releaseDate: String?
     }
+    
 }
