@@ -9,7 +9,7 @@ import Foundation
 
 protocol MoviesRepository {
     @discardableResult
-    func fetchVoviesList(
+    func fetchMoviesList(
         query: MovieQuery,
         page: Int,
         cached: @escaping (MoviesPage) -> Void,

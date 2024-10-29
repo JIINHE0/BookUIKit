@@ -9,19 +9,17 @@ import Foundation
 
 // 디코딩
 struct MoviesResponseDTO: Decodable {
-    private enum codingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case page
-        case totlaPages = "total_pages"
+        case totalPages = "total_pages"
         case movies = "results"
     }
-    
     let page: Int
     let totalPages: Int
     let movies: [MovieDTO]
 }
 
 extension MoviesResponseDTO {
-    
     struct MovieDTO: Decodable {
         private enum CodingKeys: String, CodingKey {
             case id
@@ -31,12 +29,10 @@ extension MoviesResponseDTO {
             case overview
             case releaseDate = "release_date"
         }
-        
         enum GenreDTO: String, Decodable {
             case adventure
             case scienceFiction = "science_fiction"
         }
-        
         let id: Int
         let title: String?
         let genre: GenreDTO?
@@ -44,5 +40,45 @@ extension MoviesResponseDTO {
         let overview: String?
         let releaseDate: String?
     }
-    
 }
+
+// MARK: - Mappings to Domain
+
+extension MoviesResponseDTO {
+    func toDomain() -> MoviesPage {
+        return .init(page: page,
+                     totalPages: totalPages,
+                     movies: movies.map { $0.toDomain() })
+    }
+}
+
+extension MoviesResponseDTO.MovieDTO {
+    func toDomain() -> Movie {
+        return .init(id: Movie.Identifier(id),
+                     title: title,
+                     genre: genre?.toDomain(),
+                     posterPath: posterPath,
+                     overview: overview,
+                     releaseData: dateFormatter.date(from: releaseDate ?? ""))
+    }
+}
+
+extension MoviesResponseDTO.MovieDTO.GenreDTO {
+    func toDomain() -> Movie.Genre {
+        switch self {
+        case .adventure: return .adventure
+        case .scienceFiction: return .scienceFiction
+        }
+    }
+}
+
+// MARK: - Private
+
+private let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    formatter.calendar = Calendar(identifier: .iso8601)
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    return formatter
+}()
