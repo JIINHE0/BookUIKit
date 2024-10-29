@@ -30,7 +30,6 @@ final class MoviesListViewController: UIViewController, Alertable {
 
     private var searchBarContainer: UIView = {
         let view = UIView()
-        
         return view
     }()
     
@@ -56,6 +55,28 @@ final class MoviesListViewController: UIViewController, Alertable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Movies"
+        
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.backgroundColor = UIColor.white
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        
+        [contentView, moviesListContainer, suggestionsListContainer, searchBarContainer, emptyDataLable].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
+    
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+        
         setupViews()
         bind(to: viewModel)
         viewModel.viewDidLoad()
@@ -80,6 +101,7 @@ final class MoviesListViewController: UIViewController, Alertable {
     // MARK: - Private
     
     private func setupViews() {
+        self.view.backgroundColor = .white
         self.emptyDataLable.text = viewModel.emptyDataTitle
         setupSearchController()
     }
@@ -130,6 +152,7 @@ final class MoviesListViewController: UIViewController, Alertable {
 // MARK: - Search Controller
 extension MoviesListViewController {
     private func setupSearchController() {
+        self.navigationItem.searchController = searchController
         searchController.delegate = self
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = viewModel.searchBarPlaceholder
@@ -140,6 +163,7 @@ extension MoviesListViewController {
         searchController.searchBar.frame = searchBarContainer.bounds
         searchBarContainer.addSubview(searchController.searchBar)
         definesPresentationContext = true
+        searchController.searchBar.backgroundColor = .white
         searchController.searchBar.searchTextField.accessibilityIdentifier = AccessibilityIdentifier.searchField
     }
 }
