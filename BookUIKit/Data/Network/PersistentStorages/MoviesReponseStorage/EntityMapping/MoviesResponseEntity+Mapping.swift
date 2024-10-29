@@ -49,6 +49,7 @@ extension MoviesResponseDTO {
         movies.forEach {
             entity.addToMovies($0.toEntity(in: context))
         }
+        return entity
     }
 }
 

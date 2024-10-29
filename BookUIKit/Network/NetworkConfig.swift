@@ -12,7 +12,7 @@ import Foundation
 
 protocol NetworkConfigurable {
     var baseURL: URL { get }
-    var header: [String: String] { get }
+    var headers: [String: String] { get }
     var queryParameters: [String: String] { get }
 }
 

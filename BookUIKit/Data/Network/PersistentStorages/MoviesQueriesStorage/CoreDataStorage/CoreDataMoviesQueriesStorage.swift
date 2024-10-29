@@ -31,7 +31,7 @@ extension CoreDataMoviesQueriesStorage: MoviesQueriesStorage {
         coreDataStorage.performBackgroundTask { context in
             do {
                 let request: NSFetchRequest = MovieQueryEntity.fetchRequest()
-                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(MovieQueryEntity.createsAt),
+                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(MovieQueryEntity.createdAt),
                                                             ascending: false)]
                 request.fetchLimit = maxCount
                 
