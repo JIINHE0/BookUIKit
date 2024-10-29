@@ -20,7 +20,7 @@ struct Movie: Equatable, Identifiable {
     var genre: Genre?
     var posterPath: String?
     var overview: String?
-    var releaseData: Date?
+    var releaseDate: Date?
 }
 
 struct MoviesPage: Equatable {

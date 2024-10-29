@@ -13,7 +13,7 @@ struct SearchMoviesUseCaseRequestValue {
 }
 
 protocol SearchMoviesUseCase {
-    func excute(
+    func execute(
         requestValue: SearchMoviesUseCaseRequestValue,
         cached: @escaping (MoviesPage) -> Void,
         completion: @escaping (Result<MoviesPage, Error>) -> Void
@@ -23,22 +23,22 @@ protocol SearchMoviesUseCase {
 final class DefaultSearchMoviesUseCase: SearchMoviesUseCase {
     
     private let moviewRepository: MoviesRepository
-    private let moviewQueriesRepository: MoviewQueriesRepository
+    private let moviewQueriesRepository: MoviesQueriesRepository
     
     init(
-        moviewRepository: MoviesRepository,
-        moviewQueriesRepository: MoviewQueriesRepository
+        moviesRepository: MoviesRepository,
+        moviesQueriesRepository: MoviesQueriesRepository
     ) {
-        self.moviewRepository = moviewRepository
-        self.moviewQueriesRepository = moviewQueriesRepository
+        self.moviewRepository = moviesRepository
+        self.moviewQueriesRepository = moviesQueriesRepository
     }
     
-    func excute(
+    func execute(
         requestValue: SearchMoviesUseCaseRequestValue,
         cached: @escaping (MoviesPage) -> Void,
         completion: @escaping (Result<MoviesPage, any Error>) -> Void) -> (any Cancellable)? {
             
-            return moviewRepository.fetchVoviesList(
+            return moviewRepository.fetchMoviesList(
                 query: requestValue.query,
                 page: requestValue.page,
                 cached: cached) { result in

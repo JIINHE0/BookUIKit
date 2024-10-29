@@ -39,7 +39,6 @@ extension HomeVC {
             titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             titleLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
         ])
-
     }
 }
 
