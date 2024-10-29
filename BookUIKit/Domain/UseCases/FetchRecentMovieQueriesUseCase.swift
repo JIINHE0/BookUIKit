@@ -18,12 +18,12 @@ final class FetchRecentMovieQueriesUseCase: UseCase {
     
     private let requestValue: RequestValue
     private let completion: (ResultValue) -> Void
-    private let moviesQueriesRepository: MovieQueriesRepository
+    private let moviesQueriesRepository: MoviesQueriesRepository
     
     init(
         requestValue: RequestValue,
         completion: @escaping (ResultValue) -> Void,
-        moviesQueriesRepository: MovieQueriesRepository
+        moviesQueriesRepository: MoviesQueriesRepository
     ) {
         self.requestValue = requestValue
         self.completion = completion
@@ -31,7 +31,7 @@ final class FetchRecentMovieQueriesUseCase: UseCase {
     }
     
     func start() -> Cancellable? {
-        moviesQueriesRepository.fetchRecentsQueries(maxCount: requestValue.maxCoun, comletion: completion)
+        moviesQueriesRepository.fetchRecentsQueries(maxCount: requestValue.maxCoun, completion: completion)
         return nil
     }
 }

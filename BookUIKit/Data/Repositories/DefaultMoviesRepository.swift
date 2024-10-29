@@ -16,7 +16,7 @@ final class DefaultMoviesRepository {
     init(
         dataTransferService: DataTransferService,
         cache: MoviesResponseStorage,
-        backgroundQueue: DataTransferDispatchQueue
+        backgroundQueue: DataTransferDispatchQueue = DispatchQueue.global(qos: .userInitiated)
     ) {
         self.dataTransferService = dataTransferService
         self.cache = cache

@@ -12,7 +12,7 @@ extension MovieQueryEntity {
     convenience init(movieQuery: MovieQuery, insertInto context: NSManagedObjectContext) {
         self.init(context: context)
         query = movieQuery.query
-        createsAt = Date()
+        createdAt = Date()
     }
 }
 

@@ -59,7 +59,7 @@ extension MoviesResponseDTO.MovieDTO {
                      genre: genre?.toDomain(),
                      posterPath: posterPath,
                      overview: overview,
-                     releaseData: dateFormatter.date(from: releaseDate ?? ""))
+                     releaseDate: dateFormatter.date(from: releaseDate ?? ""))
     }
 }
 

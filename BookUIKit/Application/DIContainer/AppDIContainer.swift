@@ -15,7 +15,7 @@ final class AppDIContainer {
     lazy var apiDataTransferService: DataTransferService = {
         let config = ApiDataNetworkConfig(baseURL: URL(string: appConfiguration.apiBaseUrl)!,
                                           queryParameters: [
-                                            "api_key" : appConfiguration.apikey,
+                                            "api_key" : appConfiguration.apiKey,
                                             "language" : NSLocale.preferredLanguages.first ?? "end"
                                           ]
         )
@@ -31,6 +31,15 @@ final class AppDIContainer {
     }()
     
     // MARK: - DIContainers of scenes
+    
+    func makeMoviesSceneDIContainer() -> MoviesSceneDIContainer {
+        let dependencies = MoviesSceneDIContainer.Dependencies(
+            apiDataTransferService: apiDataTransferService,
+            imageDataTransferService: imageDataTransferService
+        )
+        return MoviesSceneDIContainer(dependencies: dependencies)
+    }
+    
     
 //    func makeMoviesSceneDIContainer() -> MoviesSceneDIContainer {
 //        let dependencies = MoviesSceneDIContainer.Dependencies(

@@ -8,9 +8,10 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
+    let appDIContainer = AppDIContainer()
+    var appFlowCoordinator: AppFlowCoordinator?
     var window: UIWindow?
-//    var coordinator: MainCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -21,7 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController: UINavigationController = .init()
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = TabbarVC()
+        window?.rootViewController = navigationController
+        appFlowCoordinator = AppFlowCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
+        appFlowCoordinator?.start()
+        
         window?.makeKeyAndVisible()
     }
 

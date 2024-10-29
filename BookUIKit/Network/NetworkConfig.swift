@@ -19,7 +19,7 @@ protocol NetworkConfigurable {
 struct ApiDataNetworkConfig: NetworkConfigurable {
     
     var baseURL: URL
-    var header: [String : String]
+    var headers: [String : String]
     var queryParameters: [String : String]
     
     init(
@@ -28,7 +28,7 @@ struct ApiDataNetworkConfig: NetworkConfigurable {
         queryParameters: [String: String] = [:]
     ) {
         self.baseURL = baseURL
-        self.header = header
+        self.headers = header
         self.queryParameters = queryParameters
     }
 }
