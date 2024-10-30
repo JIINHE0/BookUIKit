@@ -37,6 +37,17 @@
 			);
 			target = 55D568912CC4CB8E00C27E59 /* BookUIKit */;
 		};
+		55E1DC2B2CD212AF009EC119 /* Exceptions for "BookUIKit" folder in "BookUIKitTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Domain/Entities/Movie.swift,
+				Network/DataTransferSercive.swift,
+				Network/Endpoint.swift,
+				Network/NetworkConfig.swift,
+				Network/NetworkService.swift,
+			);
+			target = 55D568A72CC4CB9100C27E59 /* BookUIKitTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -44,6 +55,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				55D568C72CC4CD9500C27E59 /* Exceptions for "BookUIKit" folder in "BookUIKit" target */,
+				55E1DC2B2CD212AF009EC119 /* Exceptions for "BookUIKit" folder in "BookUIKitTests" target */,
 			);
 			path = BookUIKit;
 			sourceTree = "<group>";
