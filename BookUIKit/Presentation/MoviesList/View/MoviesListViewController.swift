@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class MoviesListViewController: UIViewController, Alertable, UICollectionViewDataSource {
+final class MoviesListViewController: UIViewController, Alertable {
 
     
     private lazy var suggestionsListContainer: UICollectionView = {
@@ -16,7 +16,6 @@ final class MoviesListViewController: UIViewController, Alertable, UICollectionV
         layout.itemSize = CGSize(width: view.frame.width, height: 44)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(UICollectionView.self, forCellWithReuseIdentifier: "TextCell")
-        collectionView.dataSource = self
         view.addSubview(collectionView)
         return collectionView
     }()
@@ -93,16 +92,6 @@ final class MoviesListViewController: UIViewController, Alertable, UICollectionV
         bind(to: viewModel)
         viewModel.viewDidLoad()
     }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
-    }
-    
     
     private func bind(to viewModel: MoviesListViewModel) {
         viewModel.items.observe(on: self) { [weak self] _ in self?.updateItems() }
