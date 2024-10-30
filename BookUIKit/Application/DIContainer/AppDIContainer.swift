@@ -16,7 +16,7 @@ final class AppDIContainer {
         let config = ApiDataNetworkConfig(baseURL: URL(string: appConfiguration.apiBaseUrl)!,
                                           queryParameters: [
                                             "api_key" : appConfiguration.apiKey,
-                                            "language" : NSLocale.preferredLanguages.first ?? "end"
+                                            "language" : NSLocale.preferredLanguages.first ?? "en"
                                           ]
         )
         
@@ -39,14 +39,5 @@ final class AppDIContainer {
         )
         return MoviesSceneDIContainer(dependencies: dependencies)
     }
-    
-    
-//    func makeMoviesSceneDIContainer() -> MoviesSceneDIContainer {
-//        let dependencies = MoviesSceneDIContainer.Dependencies(
-//            apiDataTransferService: apiDataTransferService,
-//            imageDataTransferService: imageDataTransferService
-//        )
-//        return MoviesSceneDIContainer(dependencies: dependencies)
-//    }
     
 }

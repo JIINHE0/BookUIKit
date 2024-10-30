@@ -8,23 +8,22 @@
 import Foundation
 import UIKit
 
-final class MoviesListViewController: UIViewController, Alertable {
+final class MoviesListViewController: UIViewController, Alertable, UICollectionViewDataSource {
+
     
-    private var contentView: UIView = {
-        let view = UIView()
-        
-        return view
+    private lazy var suggestionsListContainer: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.frame.width, height: 44)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(UICollectionView.self, forCellWithReuseIdentifier: "TextCell")
+        collectionView.dataSource = self
+        view.addSubview(collectionView)
+        return collectionView
     }()
     
     private var moviesListContainer: UIView = {
         let view = UIView()
-        
-        return view
-    }()
-    
-    private var suggestionsListContainer: UIView = {
-        let view = UIView()
-        
+        view.backgroundColor = .yellow
         return view
     }()
 
@@ -65,22 +64,45 @@ final class MoviesListViewController: UIViewController, Alertable {
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         
-        [contentView, moviesListContainer, suggestionsListContainer, searchBarContainer, emptyDataLable].forEach {
+        [moviesListContainer, emptyDataLable, suggestionsListContainer, searchBarContainer].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
+        
+        NSLayoutConstraint.activate([
+            moviesListContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            moviesListContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            moviesListContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            moviesListContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
     
         NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            contentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            suggestionsListContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            suggestionsListContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            suggestionsListContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            suggestionsListContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+        
+        NSLayoutConstraint.activate([
+            emptyDataLable.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            emptyDataLable.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
+        
         
         setupViews()
         bind(to: viewModel)
         viewModel.viewDidLoad()
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        <#code#>
+    }
+    
     
     private func bind(to viewModel: MoviesListViewModel) {
         viewModel.items.observe(on: self) { [weak self] _ in self?.updateItems() }
