@@ -11,14 +11,14 @@ import UIKit
 final class MoviesListViewController: UIViewController, Alertable {
 
     
-    private lazy var suggestionsListContainer: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.frame.width, height: 44)
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(UICollectionView.self, forCellWithReuseIdentifier: "TextCell")
-        view.addSubview(collectionView)
-        return collectionView
-    }()
+//    private lazy var suggestionsListContainer: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.itemSize = CGSize(width: view.frame.width, height: 44)
+//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//        collectionView.register(UICollectionView.self, forCellWithReuseIdentifier: "TextCell")
+//        view.addSubview(collectionView)
+//        return collectionView
+//    }()
     
     private var moviesListContainer: UIView = {
         let view = UIView()
@@ -63,7 +63,7 @@ final class MoviesListViewController: UIViewController, Alertable {
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         
-        [moviesListContainer, emptyDataLable, suggestionsListContainer, searchBarContainer].forEach {
+        [moviesListContainer, emptyDataLable, searchBarContainer].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
@@ -75,12 +75,12 @@ final class MoviesListViewController: UIViewController, Alertable {
             moviesListContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     
-        NSLayoutConstraint.activate([
-            suggestionsListContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            suggestionsListContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            suggestionsListContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            suggestionsListContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ])
+//        NSLayoutConstraint.activate([
+//            suggestionsListContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            suggestionsListContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+//            suggestionsListContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+//            suggestionsListContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+//        ])
         
         NSLayoutConstraint.activate([
             emptyDataLable.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
@@ -125,7 +125,7 @@ final class MoviesListViewController: UIViewController, Alertable {
     private func updateLoading(_ loading: MoviesListViewModelLoading?) {
         emptyDataLable.isHidden = true
         moviesListContainer.isHidden = true
-        suggestionsListContainer.isHidden = true
+//        suggestionsListContainer.isHidden = true
         LoadingView.hide()
         
         switch loading {
