@@ -29,7 +29,7 @@ protocol DataTransferErrorLogger {
 /// NetworkService를 사용하여 네트워크 요청을 수행하지만, 더 높은 수준의 인터페이스를 제공
 /// NetworkService의 기능을 래핑하여, 네트워크 요청의 처리 로직을 더 간편하고 유연하게 사용할 수 있게 만든것
 /// Result 타입으로 응답을 처리
-/// 요청을 별도의 디스패치 큐에서 처리할 수 있도록 두 가지 메서드를 제공 (동시성 처리와 베인 스레드 부하르 줄이기 위한 유연성 제공)
+/// 요청을 별도의 디스패치 큐에서 처리할 수 있도록 두 가지 메서드를 제공 (동시성 처리와 메인 스레드 부하를 줄이기 위한 유연성 제공)
 protocol DataTransferService {
     
     typealias CompletionHandler<T> = (Result<T, DataTransferError>) -> Void
